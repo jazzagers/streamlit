@@ -45,8 +45,6 @@ df['Adult'] = df['ages'].apply(lambda x: 'Yes' if x >= 18 else 'No')
 
 # Display DataFrame in Streamlit
 st.dataframe(df)
-
-
 import pandas as pd
 from sklearn import datasets
 import matplotlib.pyplot as plt
@@ -81,47 +79,3 @@ ax.set_ylabel('Frequency')
 st.pyplot(fig)
 
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-# Select features to display scatter plot
-feature_x = st.selectbox('Select feature for x axis', df.columns)
-feature_y = st.selectbox('Select feature for y axis', df.columns)
-
-# Display scatter plot
-fig, ax = plt.subplots()
-sns.scatterplot(data=df, x=feature_x, y=feature_y, hue=iris.target, ax=ax)
-st.pyplot(fig)
-
-
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-# Plotting a histogram
-st.subheader('Histogram: Sepal Length')
-plt.figure(figsize=(10,6))
-sns.histplot(data=df, x='sepal length (cm)', kde=True)
-st.pyplot(plt.clf())
-
-# Plotting a scatter plot
-st.subheader('Scatter plot: Sepal Length vs Sepal Width')
-plt.figure(figsize=(10,6))
-sns.scatterplot(data=df, x='sepal length (cm)', y='sepal width (cm)', hue=iris.target)
-st.pyplot(plt.clf())
-
-# Creating a time-series DataFrame
-import numpy as np
-
-t = pd.date_range('2023-01-01', '2023-12-31', freq='D')
-data = np.random.randn(len(t))
-time_series_df = pd.DataFrame({'Date': t, 'Value': data}).set_index('Date')
-
-# Display line chart
-st.line_chart(time_series_df)
-
-# Loading data from URL
-url = 'https://raw.githubusercontent.com/jbrownlee/Datasets/master/daily-min-temperatures.csv'
-df = pd.read_csv(url, parse_dates=['Date'])
-
-# Display line chart
-st.line_chart(df.set_index('Date'))
